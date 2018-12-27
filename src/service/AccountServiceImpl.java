@@ -1,5 +1,12 @@
 package service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
+
+import domain.AccountBean;
+
 /**
  * @author Lee Jong-Hyup
  * @date 2018. 12. 26.
@@ -7,37 +14,70 @@ package service;
  * 
  */
 public class AccountServiceImpl implements AccountService{
-
+	private ArrayList<AccountBean> list;
+	
+	public AccountServiceImpl() {
+		list = new ArrayList<>();
+	}
+/****************************
+ * 	Create
+ ***************************/
 	@Override
 	public void createAccount(int money) {
-		// TODO Auto-generated method stub
+		AccountBean account = new AccountBean();
+		account.setAccountNum(createAccountNum());
+		account.setMoney(money);
+		account.setToday(findDate());
+		list.add(account);
+	}
+	public String createAccountNum() {
+		String accountNum = "";
+		Random random = new Random();
+		accountNum = random.nextInt(9999)+1 +"-"+random.nextInt(9999) ;
+		return accountNum;
 		
 	}
-
+	/****************************
+	 * 	Read
+	 ***************************/
 	@Override
-	public void findAll() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<AccountBean> findAll() {
+	
+		return list;
 	}
-
 	@Override
-	public void findByAccountNum(String accountNum) {
-		// TODO Auto-generated method stub
-		
+	public AccountBean findByAccountNum(String accountNum) {
+		AccountBean accountBean = new AccountBean();
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getAccountNum().equals(accountNum)) {
+				
+			}
+		}
+		return accountBean;
 	}
-
 	@Override
 	public int countAccount() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+		return list.size();
 	}
-
 	@Override
 	public boolean existAccount(String accountNum) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ok = false;
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getAccountNum().equals(accountNum)) {
+				ok = true;
+		}		
 	}
-
+		return ok;
+}
+	@Override
+	public String findDate() {
+	String today = "";
+	Date date = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	today = sdf.format(date);
+	return today;
+	}
 	@Override
 	public int depositAccount(int money) {
 		// TODO Auto-generated method stub
@@ -51,16 +91,10 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	@Override
-	public void updatePass(String id, String name, String newPass) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void deleteMember(String id, String pass) {
 		// TODO Auto-generated method stub
-		
 	}
+
 	
 	
 

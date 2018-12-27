@@ -1,6 +1,8 @@
 package service;
 
-import domain.MemberBean;
+import java.util.ArrayList;
+
+import domain.AccountBean;
 
 /**
  * @author Lee Jong-Hyup
@@ -8,16 +10,20 @@ import domain.MemberBean;
  * @dese 은행 계좌 서비스
  * 
  */
+// create
 public interface AccountService{ 
-
 	public void createAccount(int money);
-	public void findAll();
-	public void findByAccountNum(String accountNum);
+	public String createAccountNum(); // 계좌번호생성
+	// read
+	public ArrayList<AccountBean> findAll();
+	public AccountBean findByAccountNum(String accountNum);
 	public int	countAccount();
 	public boolean	existAccount(String accountNum);
+	public String findDate(); // 날짜반환
+	//update
 	public int depositAccount(int money);
 	public int withdrowAccount(int money);
-	public void updatePass(String id,String name,String newPass);
+	//delete
 	public void deleteMember(String id,String pass);
 
  

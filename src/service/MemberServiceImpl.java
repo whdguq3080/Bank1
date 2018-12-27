@@ -10,13 +10,13 @@ import domain.MemberBean;
  */
 public class MemberServiceImpl implements MemberService{
 	private MemberBean[] members;
-	private int count;
+	private int count,same;
 	public MemberServiceImpl(){
 	members = new MemberBean[10];
 	count = 0;
 	}
 	@Override
-	public void info(String id, String name, String ssn, String pass) {
+	public void createMember(String id, String name, String ssn, String pass) {
 	MemberBean member = new MemberBean();
 	member.setId(id);
 	member.setName(name);
@@ -32,10 +32,23 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberBean[] findByName(String name) {
-		
-		return null;
-	}
+		MemberBean[] members = new MemberBean[same];
+		for (int i = 0; i < count; i++) {
+			if (members[i].getName().equals(name)) {
+				same++;
+			}
+		}
+		System.out.println(same);
 
+		for (int i = 0, j = 0; i < count; i++) {
+			if (members[i].getName().equals(name)) {
+				members[j] = members[i];
+				j++;
+
+		} 
+	}
+		return members;
+	}
 	@Override
 	public MemberBean findById(String id) {
 		MemberBean member = new MemberBean();
@@ -50,27 +63,41 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int countMember() {
-		// TODO Auto-generated method stub
-		return 0;
+		return count;
 	}
 
 	@Override
 	public boolean existMember(String id, String pass) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ok = false;
+		for(int i=0; i<count; i++) {
+			if(members[i].getId().equals(id)&&members[i].getPass().equals(pass)) {
+				ok= true;
+			}
+		}
+		return ok;
 	}
 
 	@Override
-	public void updatePass(String id, String name, String newPass) {
-		// TODO Auto-generated method stub
-
+	public void updatePass(String id, String pass, String newPass) {
+		for(int i=0; i<count; i++) {
+			if(existMember(id,pass)) {
+					members[i].setPass(newPass);
+					break;
+			}
+		}
 	}
 
 	@Override
 	public void deleteMember(String id, String pass) {
-		// TODO Auto-generated method stub
-
-	}
+		for(int i=0;i<count;i++) { 
+			 if(existMember(id,pass)) { 
+				members[i] = members[count-1]; 
+				members[count-1] = null; 
+			 	count--; 
+			 	break; 
+}
+}
+}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
