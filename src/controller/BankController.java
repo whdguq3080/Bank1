@@ -25,7 +25,11 @@ public class BankController {
 			 		+ "8.회원탈퇴\n"
 			 		+ "9.계좌생성\n"
 			 		+ "10.계좌번호 생성\n"
-			 		+ "11.계좌 목록")) {
+			 		+ "11.계좌 찾기\n"
+			 		+ "12.계좌 목록\n"
+			 		+ "13.입금\n"
+			 		+ "14.출금\n"
+			 		+ "15.계좌삭제")) {
 			case "0":JOptionPane.showMessageDialog(null,"종료합니다");
 				     return;
 			case "1":String id = JOptionPane.showInputDialog("아이디");
@@ -57,12 +61,22 @@ public class BankController {
 			case "8":memberService.deleteMember(JOptionPane.showInputDialog("아이디 입력"),
 												JOptionPane.showInputDialog("비밀번호 입력"));
 					 break;
-			case "9":
+			case "9":accountService.createAccount(Integer.parseInt(JOptionPane.showInputDialog("첫가입 금액")));
 					 break;
 			case "10":accountService.createAccountNum();
+					 break;
+			case "11":accountService.findByAccountNum(JOptionPane.showInputDialog("찾으실 계좌 입력"));
+					 break;
+			case "12":JOptionPane.showInputDialog(null,accountService.findAll()); 
 					  break;
-			case "11":JOptionPane.showInputDialog(accountService.findAll()); 
-			 
+			case "13":accountService.depositMoney(JOptionPane.showInputDialog("입금 계좌번호 "),
+					   Integer.parseInt(JOptionPane.showInputDialog("입금하실 금액")));
+					   break;
+			case "14":accountService.withdrowMoney(JOptionPane.showInputDialog("출금 계좌번호 "), 
+					   Integer.parseInt(JOptionPane.showInputDialog("출금하실 금액"))); 
+					   break;
+			case "15":accountService.deleteAccountNum(JOptionPane.showInputDialog("계좌입력"));
+					  break;
 			 }
 		 }
 	 }

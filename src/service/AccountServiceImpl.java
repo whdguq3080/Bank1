@@ -60,16 +60,7 @@ public class AccountServiceImpl implements AccountService{
 	
 		return list.size();
 	}
-	@Override
-	public boolean existAccount(String accountNum) {
-		boolean ok = false;
-		for(int i=0; i<list.size(); i++) {
-			if(list.get(i).getAccountNum().equals(accountNum)) {
-				ok = true;
-		}		
-	}
-		return ok;
-}
+
 	@Override
 	public String findDate() {
 	String today = "";
@@ -78,24 +69,35 @@ public class AccountServiceImpl implements AccountService{
 	today = sdf.format(date);
 	return today;
 	}
-	@Override
-	public int depositAccount(int money) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int withdrowAccount(int money) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void deleteMember(String id, String pass) {
-		// TODO Auto-generated method stub
-	}
-
 	
-	
+	@Override 
+	public void depositMoney(String accountNum,int money) { 
+		for(int i=0;i<list.size();i++) { 
+		 	if(list.get(i).getAccountNum().equals(accountNum)) { 
+		 		int restMoney = list.get(i).getMoney(); 
+		 			restMoney+=money; 
+					list.get(i).setMoney(restMoney); 
+				} 
+		 	} 
+	}
 
+	@Override
+	public void withdrowMoney(String accountNum,int money) {
+		for(int i=0;i<list.size();i++) { 
+		 	if(list.get(i).getAccountNum().equals(accountNum)) { 
+		 		int restMoney = list.get(i).getMoney(); 
+		 			restMoney-=money; 
+					list.get(i).setMoney(restMoney); 
+				} 
+		 	} 
+	}
+
+	@Override
+	public void deleteAccountNum(String accountNum) {
+		for(int i=0;i<list.size();i++) { 
+			 if(list.get(i).getAccountNum().equals(accountNum)) { 
+				list.remove(i); 
+		 } 
+	}
+}
 }

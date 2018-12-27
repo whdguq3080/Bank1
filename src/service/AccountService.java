@@ -18,13 +18,12 @@ public interface AccountService{
 	public ArrayList<AccountBean> findAll();
 	public AccountBean findByAccountNum(String accountNum);
 	public int	countAccount();
-	public boolean	existAccount(String accountNum);
 	public String findDate(); // 날짜반환
 	//update
-	public int depositAccount(int money);
-	public int withdrowAccount(int money);
+	public void depositMoney(String accountNum,int money);
+	public void withdrowMoney(String accountNum,int money);
 	//delete
-	public void deleteMember(String id,String pass);
+	public void deleteAccountNum(String accountNum);
 
  
 }

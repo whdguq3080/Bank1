@@ -24,7 +24,10 @@ public class AccountBean {
 	}
 	@Override
 	public String toString() {
-		return "AccountBean [accountNum=" + accountNum + ", today=" + today + ", money=" + money + "]";
+		return "\n[계좌 목록] =\n"
+				+ " 계 좌 =" + accountNum + "\n"
+				+ " 날 짜 =" + today + "\n"
+				+ " 잔 액 =" + money ;
 	}
  
 	
